@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <h1>Open the console window to play the game.</h1>
+    <script>
+        function getComputerChoice() {
+            let randomNum = Math.floor(Math.random() * 3); // 0, 1, or 2
+            let choice;
+            if (randomNum === 0) {
+                choice = "rock";
+            } else if (randomNum === 1) {
+                choice = "paper";
+            } else {
+                choice = "scissors";
+            }
+            return choice;
+        }
+
+        function getHumanChoice() {
+            let input = prompt(
+                "Enter your choice [Rock, Paper, Scissors]: "
+            );
+            return input ? input.toLowerCase() : "";
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            if (playerSelection === computerSelection) {
+                return "DRAW!";
+            } else if (
+                (computerSelection === "rock" && playerSelection === "paper") ||
+                (computerSelection === "paper" && playerSelection === "scissors") ||
+                (computerSelection === "scissors" && playerSelection === "rock")
+            ) {
+                return "You win! " + playerSelection + " beats " + computerSelection;
+            } else {
+                return "You lose! " + computerSelection + " beats " + playerSelection;
+            }
+        }
+
+        let humanScore = 0, computerScore = 0
+
+        let rounds = 5
+
+        while(rounds-- != 0) {
+            let computerChoice = getComputerChoice();
+            let humanChoice = getHumanChoice();
+            if (!["rock", "paper", "scissors"].includes(humanChoice)) {
+                alert("Invalid choice! Try again.");
+                rounds++; // Give the player another chance
+                continue;
+            }
+            let result = playRound(computerChoice, humanChoice);
+            console.log(result);
+            if (result.includes("You win!")) {
+                humanScore++;
+            } else if (result.includes("You lose!")) {
+                computerScore++;
+            }
+            console.log(`Score: You ${humanScore} - Computer ${computerScore}`);
+        }
+
+        console.log("Final Score: You " + humanScore + " - Computer " + computerScore);
+    </script>
+</body>
+</html>
