@@ -1,1 +1,1 @@
-# rock-paper-scissors-TOP
+# A simple rock paper scissors game on console
